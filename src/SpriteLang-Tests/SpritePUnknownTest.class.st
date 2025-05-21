@@ -81,3 +81,13 @@ let main = (arg) => {
 };
 '
 ]
+
+{ #category : #tests }
+SpriteJibVarTest >> test_unconstrained04 [
+	self proveSafe: '
+⟦val main: int => int => int⟧
+let main = (a1,a2) => {
+	□
+};
+'
+]
