@@ -72,8 +72,15 @@ embedApp :: SrcExpr -> F.Expr
 ]
 
 { #category : #accessing }
-ΛEApp >> expr: anObject [
-	expr := anObject
+ΛEApp >> expr: immOrAppOrDecl [
+	self assert: 
+		"either"(((immOrAppOrDecl isKindOf: EImm) and:[(immOrAppOrDecl imm isKindOf: EVar)])
+	      or: [((immOrAppOrDecl isKindOf: EImm) and:[(immOrAppOrDecl imm isKindOf: ECon) and: [immOrAppOrDecl imm prim isKindOf: PBin]])
+	      or: [ (immOrAppOrDecl isKindOf: ΛEApp)
+	      or: [ (immOrAppOrDecl isKindOf: ETApp)
+	      or: [ (immOrAppOrDecl isKindOf: SpriteDecl)]]]]).
+
+	expr := immOrAppOrDecl
 ]
 
 { #category : #'as yet unclassified' }
@@ -92,8 +99,17 @@ embedApp :: SrcExpr -> F.Expr
 ]
 
 { #category : #accessing }
-ΛEApp >> imm: anObject [
-	imm := anObject
+ΛEApp >> imm: econOrEvarOrΛexpr [
+	self assert: 
+		"either"((econOrEvarOrΛexpr isKindOf:ECon)
+		    or: [(econOrEvarOrΛexpr isKindOf:EVar)
+		    or: [(econOrEvarOrΛexpr isKindOf:ΛExpression)]]).
+	
+	imm := econOrEvarOrΛexpr.
+	
+	(imm isKindOf: EImm) ifTrue:[
+		imm := imm imm.
+	]
 ]
 
 { #category : #inlining }
