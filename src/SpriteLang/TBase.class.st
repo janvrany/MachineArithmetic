@@ -14,6 +14,15 @@ TBase class >> b: b r: r [
 		b: b; r: r; yourself
 ]
 
+{ #category : #convenience }
+TBase >> => anotherType [
+	self assert: (anotherType isKindOf: TFun) not.
+	^TFun 
+		x: String junkSymbol 
+		s: self
+		t: anotherType
+]
+
 { #category : #accessing }
 TBase >> b [
 	^ b

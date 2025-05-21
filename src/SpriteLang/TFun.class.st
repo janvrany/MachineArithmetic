@@ -15,6 +15,16 @@ TFun class >> x: x s: s t: t [
 		x: x; s: s; t: t; yourself 
 ]
 
+{ #category : #convenience }
+TFun >> => anotherType [
+	self assert: (anotherType isKindOf: TFun) not.
+	
+	^TFun 
+		x: x
+		s: s
+		t: t => anotherType
+]
+
 { #category : #'refinement abstraction' }
 TFun >> bkFun [
 "
