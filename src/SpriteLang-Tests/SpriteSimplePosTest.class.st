@@ -22,6 +22,16 @@ let check = (x) => {
 ]
 
 { #category : #tests }
+SpriteSimplePosTest >> test_diverge [
+	self proveSafe:  '
+⟦val main: int => int⟧
+let main = (x) => {
+  diverge(0)
+};
+'
+]
+
+{ #category : #tests }
 SpriteSimplePosTest >> test_full_closure [
 	self processString: '
 ⟦val main: int => int[v| v === 42 ]⟧
