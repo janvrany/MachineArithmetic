@@ -40,3 +40,32 @@ let main = (x, y) => {
 };
 '
 ]
+
+{ #category : #tests }
+SpriteDataPosTest >> test_data_with_bv_01 [
+	self processString: '
+type a =
+  | A (BitVec(Size32))
+  ;
+
+⟦val id : a => a⟧
+let id = (x) => { 
+	x
+};
+'
+]
+
+{ #category : #tests }
+SpriteDataPosTest >> test_data_with_bv_02 [
+	self processString: '
+type a =
+  | A (BitVec(Size32))
+  ;
+
+⟦val f : int => a⟧
+let f = (x) => {
+	let a = A(toBitVector(12));
+ 	a
+};
+'
+]
