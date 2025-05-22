@@ -74,6 +74,8 @@ ECase >> x [
 ]
 
 { #category : #accessing }
-ECase >> x: anObject [
-	x := anObject
+ECase >> x: stringOrΛExpr [
+	self assert: (stringOrΛExpr isString or:[stringOrΛExpr isKindOf: ΛExpression]).
+
+	x := stringOrΛExpr
 ]
