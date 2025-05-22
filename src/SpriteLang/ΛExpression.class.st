@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #'instance creation' }
+ΛExpression class >> bool: aBoolean [
+	^EImm imm: (ECon prim: (PBool bool: aBoolean))
+]
+
+{ #category : #'instance creation' }
+ΛExpression class >> diverge [
+	^self variable:'**diverge**'
+]
+
+{ #category : #'instance creation' }
 ΛExpression class >> fromDecls: aSequenceableCollection [
 	aSequenceableCollection isEmpty ifTrue: [ self error: 'Program has no decls' ].
 	^aSequenceableCollection size = 1
@@ -15,6 +25,16 @@ Class {
 { #category : #'instance creation' }
 ΛExpression class >> int: anInteger [
 	^EImm imm: (ECon prim: (PInt integer: anInteger))
+]
+
+{ #category : #'instance creation' }
+ΛExpression class >> unknown [
+	^EImm imm: (ECon prim: (PUnknown new))
+]
+
+{ #category : #'instance creation' }
+ΛExpression class >> variable: aString [
+	^EImm imm: (EVar of: aString)
 ]
 
 { #category : #reflect }
