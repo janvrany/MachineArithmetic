@@ -17,6 +17,15 @@ TCon class >> c: c ts: ts ars: ars r: r [
 		c: c; ts: ts; ars: ars; r: r; yourself
 ]
 
+{ #category : #convenience }
+TCon >> => anotherType [
+	self assert: (anotherType isKindOf: TFun) not.
+	^TFun 
+		x: String junkSymbol 
+		s: self
+		t: anotherType
+]
+
 { #category : #accessing }
 TCon >> ars [
 	^ ars
