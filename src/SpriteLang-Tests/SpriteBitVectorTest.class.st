@@ -114,3 +114,64 @@ SpriteBitVectorTest >> test_Create [
 let int8 = toBitVector(127);
 '
 ]
+
+{ #category : #tests }
+SpriteBitVectorTest >> test_Eq_01a [
+	self proveSafe: '
+⟦val main : int => bool[b|b]⟧
+let main = (x) => {
+	⟦val a : BitVec(Size32)⟧
+	let a = toBitVector(2);
+
+	let b = toBitVector(2);
+  
+	a == b
+};
+'
+]
+
+{ #category : #tests }
+SpriteBitVectorTest >> test_Eq_01b [
+	self proveSafe: '
+⟦val main : int => bool[b|b]⟧
+let main = (x) => {
+	let a = toBitVector(2);
+
+	⟦val b : BitVec(Size32)⟧
+	let b = toBitVector(2);
+  
+	a == b
+};
+'
+]
+
+{ #category : #tests }
+SpriteBitVectorTest >> test_Eq_02b [
+	self proveSafe: '
+⟦val main : int => bool[b|b]⟧
+let main = (x) => {
+	let a = toBitVector(3);
+
+	⟦val b : BitVec(Size32)⟧
+	let b = toBitVector(3);
+  
+	a == b
+};
+'
+]
+
+{ #category : #tests }
+SpriteBitVectorTest >> test_Eq_03 [
+	self proveSafe: '
+⟦val main : int => bool[b|b]⟧
+let main = (x) => {
+	⟦val a : BitVec(Size32)⟧
+	let a = toBitVector(3);
+
+	⟦val b : BitVec(Size32)⟧
+	let b = toBitVector(3);
+  
+	a == b
+};
+'
+]
