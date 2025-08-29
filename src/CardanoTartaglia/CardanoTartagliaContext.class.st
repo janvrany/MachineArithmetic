@@ -47,6 +47,8 @@ CardanoTartagliaContext >> evaluate: source [
 		VariableNotDeclared new
 			variableNode: warning node;
 			signal.
+	] on: SyntaxErrorNotification  do:[ :error |
+		self error: 'Failed to evaluate: ' , error description
 	]
 ]
 
