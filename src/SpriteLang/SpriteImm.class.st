@@ -20,8 +20,20 @@ immExpr :: Imm b -> F.Expr
 ]
 
 { #category : #testing }
+SpriteImm >> isCon [
+	"Return true, if receiver is an ECon"
+	^ false
+]
+
+{ #category : #testing }
 SpriteImm >> isLet [
 	^false
+]
+
+{ #category : #testing }
+SpriteImm >> isVar [
+	"Return true, if receiver is an EVar"
+	^ false
 ]
 
 { #category : #printing }

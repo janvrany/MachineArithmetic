@@ -48,6 +48,12 @@ EVar >> isRVarApp: _ whichCameFrom: unevaluated [
 ]
 
 { #category : #'*SpriteLang' }
+EVar >> isVar [
+	"Return true if receiver is an EVar"
+	^ true
+]
+
+{ #category : #'*SpriteLang' }
 EVar >> rvarArgSymbol [
 "
 rvarArgSymbol :: String -> F.Expr -> F.Symbol

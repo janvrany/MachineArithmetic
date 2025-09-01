@@ -11,8 +11,20 @@ Expr >> gtExpr [
 ]
 
 { #category : #'*SpriteLang' }
+Expr >> isCon [
+	"Return true if receiver is an ECon"
+	^ false
+]
+
+{ #category : #'*SpriteLang' }
 Expr >> isLet [
 	^false
+]
+
+{ #category : #'*SpriteLang' }
+Expr >> isVar [
+	"Return true if receiver is an EVar"
+	^ false
 ]
 
 { #category : #'*SpriteLang' }

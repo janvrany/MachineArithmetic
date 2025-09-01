@@ -61,7 +61,13 @@ ECon >> inlineFunction: f λ: x body: b [
 ]
 
 { #category : #testing }
-ECon >> isConstantNamed: s [ 
+ECon >> isCon [
+	"Return true, if receiver is an ECon"
+	^ true
+]
+
+{ #category : #testing }
+ECon >> isConstantNamed: s [
 	^false
 ]
 

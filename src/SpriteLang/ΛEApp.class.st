@@ -124,11 +124,18 @@ embedApp :: SrcExpr -> F.Expr
 		eapp := eapp expr.
 	].
 	func := eapp.
-
-	func spriteOn: stream indent: level.
-	stream nextPut: $(.
-	args do:[:arg | arg spriteOn: stream indent: level ] separatedBy:[stream nextPutAll:', '].
-	stream nextPut: $).
+	
+	func imm isCon ifTrue:[
+		self assert: args size == 2.
+		args first spriteOn: stream indent: level.
+		stream space; nextPutAll: func imm prim primOp class operator; space.
+		args second spriteOn: stream indent: level.		
+	] ifFalse:[
+		func spriteOn: stream indent: level.
+		stream nextPut: $(.
+		args do:[:arg | arg spriteOn: stream indent: level ] separatedBy:[stream nextPutAll:', '].
+		stream nextPut: $).
+	].
 
 ]
 
