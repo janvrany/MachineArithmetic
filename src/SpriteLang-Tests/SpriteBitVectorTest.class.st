@@ -116,6 +116,102 @@ let int8 = toBitVector(127);
 ]
 
 { #category : #tests }
+SpriteBitVectorTest >> test_Matias_01 [
+	self proveSafe: '
+⟦reflect BB_003 : x:BitVec(Size32) => i:BitVec(Size32) => BitVec(Size32)⟧
+let BB_003 = (x, i) => {
+    let N017 = i;
+    N017
+};
+
+
+⟦reflect BB_001 : x:BitVec(Size32) => i:BitVec(Size32) => BitVec(Size32) / [100]⟧
+let rec BB_001 = (x, i) => {
+    let N014 = i;
+    let tmp1 = toBitVector(5);
+    let N015 = tmp1;
+    let cond = bvsge(N014, N015);
+    if (cond) {
+        BB_003(x, i)
+    } else {
+        let zzz = 0;
+        let yyy = 1234;
+        let tmp1 = toBitVector(1);
+        let N009 = tmp1;
+        let N010 = bvadd(N014, N009);
+        let i = N010;
+        BB_001(x, i)
+    }
+};
+
+
+⟦reflect dead_branch : x:BitVec(Size32) => BitVec(Size32)⟧
+let dead_branch = (x) => {
+    let tmp1 = toBitVector(42);
+    let N002 = tmp1;
+    let i = N002;
+    BB_001(x, i)
+};
+
+⟦val verify : BitVec(Size32) => bool[b|b]⟧
+let verify = (x) => {
+	let exp = toBitVector(42);
+	let got = dead_branch(x);
+	got == exp
+};
+'
+]
+
+{ #category : #tests }
+SpriteBitVectorTest >> test_Matias_02 [
+	self proveSafe: '
+[--check-termination]	
+	
+⟦reflect BB_003 : x:BitVec(Size32) => i:BitVec(Size32) => BitVec(Size32)⟧
+let BB_003 = (x, i) => {
+    let N017 = i;
+    N017
+};
+
+
+⟦reflect BB_001 : x:BitVec(Size32) => i:BitVec(Size32) => BitVec(Size32) / [100 toInt]⟧
+let rec BB_001 = (x, i) => {
+    let N014 = i;
+    let tmp1 = toBitVector(5);
+    let N015 = tmp1;
+    let cond = bvsge(N014, N015);
+    if (cond) {
+        BB_003(x, i)
+    } else {
+        let zzz = 0;
+        let yyy = 1234;
+        let tmp1 = toBitVector(1);
+        let N009 = tmp1;
+        let N010 = bvadd(N014, N009);
+        let i = N010;
+        BB_001(x, i)
+    }
+};
+
+
+⟦reflect dead_branch : x:BitVec(Size32) => BitVec(Size32)⟧
+let dead_branch = (x) => {
+    let tmp1 = toBitVector(42);
+    let N002 = tmp1;
+    let i = N002;
+    BB_001(x, i)
+};
+
+⟦val verify : BitVec(Size32) => bool[b|b]⟧
+let verify = (x) => {
+	let exp = toBitVector(42);
+	let got = dead_branch(x);
+	got == exp
+};
+'
+]
+
+{ #category : #tests }
 SpriteBitVectorTest >> test_Sge_01 [
 	self proveSafe: '
 ⟦val icmpge : a:BitVec(Size32) => b:BitVec(Size32) => bool[v|v === (a >= b)]⟧
